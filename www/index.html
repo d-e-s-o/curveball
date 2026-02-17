@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
   <head>
+  <title>Curveball</title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
     <link rel="stylesheet" href="main.css">
   </head>
@@ -38,15 +40,15 @@
         error.classList.remove("hidden");
       }
 
-      import * as wasm from "./pkg/curveball.js";
+      try {
+        const { default: init, run } = await import("./pkg/curveball.js");
 
-      wasm
-        .default("./pkg/curveball_bg.wasm")
-        .then(() => {
-          var canvas = document.getElementById("canvas");
-          wasm.run(canvas)
-        })
-        .catch(showError)
+        await init("./pkg/curveball_bg.wasm");
+        var canvas = document.getElementById("canvas");
+        run(canvas)
+      } catch(err) {
+        showError(err)
+      }
     </script>
   </body>
 </html>
