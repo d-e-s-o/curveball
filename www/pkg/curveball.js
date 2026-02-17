@@ -1,3 +1,5 @@
+alert("test.js loaded");
+
 let wasm;
 
 function addToExternrefTable0(obj) {
